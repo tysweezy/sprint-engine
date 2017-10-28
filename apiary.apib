@@ -3,78 +3,140 @@ HOST: http://polls.apiblueprint.org/
 
 # sprint-engine
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Sprint engine is an API for a project management system.
 
-## Questions Collection [/questions]
 
-### List All Questions [GET]
+## Tasks [/tasks]
+
+### List All Tasks [GET]
+
+Lists all of the tasks.
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "user": {
+                    "id": 1,
+                    "first_name": "Tyler",
+                    "last_name": "Souza",
+                    "username": "tysweezy"
+                }
             }
         ]
 
-### Create a New Question [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Create a New Task [POST]
+
+You can create a new task. It takes a JSON payload via a POST request.
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high"
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /tasks/2
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "id": 2
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "published_at": "2015-08-05T08:40:51.620Z"
+ 
+            }
+            
+## Task Detail [/tasks/{task_id}]            
+            
+### Get task detail [GET]
+
+In this endpoint, you can view the details of a particular task.
+
++ Response 201 (application/json)
+    
+    + Headers
+        
+            Location: /tasks/2
+        
+    + Body
+        
+            {
+                "id": 2
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "published_at": "2015-08-05T08:40:51.620Z"
+            }
+
+### Update a task [PUT]
+
+You can update the tasks here.
+
++ Request (application/json)
+
+            {
+                "id": 2
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "published_at": "2015-08-05T08:40:51.620Z"
+            }
+
++ Response 201 (application/json)
+    
+    + Headers
+        
+            Location: /tasks/2
+        
+    + Body
+        
+            {
+                "id": 2
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "published_at": "2015-08-05T08:40:51.620Z"
+            }
+            
+            
+### Delete a task [DELETE]
+
+You can delete a task here
+
++ Request (application/json)
+
+            {
+                "id": 2
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "published_at": "2015-08-05T08:40:51.620Z"
+            }
+
++ Response 201 (application/json)
+    
+    + Headers
+        
+            Location: /tasks/2
+        
+    + Body
+        
+            {
+                "id": 2
+                "name": "foo name",
+                "description": "bar description",
+                "priority": "high",
+                "published_at": "2015-08-05T08:40:51.620Z"
             }
